@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -91,11 +92,6 @@ public class MainActivity extends AppCompatActivity {
             getPagerData();
             profileBasicInfo(sharedPref.getUserId());
         }
-
-        viewPager.setAdapter(imageAdapter);
-        viewPager.setClipToPadding(false);
-        viewPager.setPadding(100,170,100,170);
-        viewPager.setPageMargin(60);
 
         clickListenersMainMenu();
 
@@ -450,7 +446,15 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel:+91" + phone));
         startActivity(intent);
+        }
     }
 
-}
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        viewPager.setAdapter(imageAdapter);
+        viewPager.setClipToPadding(false);
+        viewPager.setPadding(100,0,100,0);
+        viewPager.setPageMargin(60);
+    }
 }
